@@ -1,3 +1,4 @@
+const { Console } = require('console');
 const path = require('path');
 
 // Load the .env file for local development
@@ -18,8 +19,9 @@ if (
 	}
 	throw new Error(message);
 }
-
+	console.log('CHECKING ENV')
 if (process.env.PANTHEON_ENVIRONMENT_URL) {
+	console.log(process.env.PANTHEON_ENVIRONMENT_URL)
 	let PANTHEON_ENVIRONMENT_PREFIX = undefined
 	let IS_LIVE_ENVIRONMENT = undefined
 	const envPrefix =
@@ -31,6 +33,8 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
 	}
 }
+console.log('Done')
+console.log(PANTHEON_ENVIRONMENT_PREFIX)
 
 let backendUrl, imageDomain;
 if (process.env.WPGRAPHQL_URL === undefined) {
