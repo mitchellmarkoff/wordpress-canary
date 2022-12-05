@@ -43,6 +43,25 @@ if (process.env.PANTHEON_UPLOAD_PATH) {
 	injectedOptions['basePath'] = process.env.PANTHEON_UPLOAD_PATH;
 }
 
+if (process.env.PANTHEON_ENVIRONMENT_URL) {
+	let PANTHEON_ENVIRONMENT_PREFIX = undefined
+	let IS_LIVE_ENVIRONMENT = undefined
+	const envPrefix =
+		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
+	console.log('PREFIX')
+	console.log(envPrefix)
+	if (envPrefix === 'live') {
+		console.log('IS LIVE')
+		PANTHEON_ENVIRONMENT_PREFIX = 'live'
+		IS_LIVE_ENVIRONMENT = 'live'
+	} else {
+		console.log('ELSE CASE')
+		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/);
+	}
+	console.log('PANTHEON ENVIRONMENT')
+	console.log(PANTHEON_ENVIRONMENT_PREFIX)
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	...(injectedOptions && injectedOptions),
