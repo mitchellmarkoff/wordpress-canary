@@ -61,7 +61,7 @@ const nextConfig = {
 	...(injectedOptions && injectedOptions),
 	reactStrictMode: true,
 	env: {
-		backendUrl: backendUrl,
+		backendUrl: `https://multi-wp-wp-for-interview.pantheonsite.io/wp/graphql`,
 		imageUrl: `https://${imageDomain}`,
 	},
 	images: {
