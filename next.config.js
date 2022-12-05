@@ -36,7 +36,6 @@ if (process.env.WPGRAPHQL_URL === undefined) {
 			'',
 		);
 }
-backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
 console.log('BACKEND URL')
 console.log(backendUrl)
 // remove trailing slash if it exists
@@ -66,6 +65,8 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 }
 console.log('Done')
 console.log(PANTHEON_ENVIRONMENT_PREFIX)
+backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
+
 
 const injectedOptions = {};
 if (process.env.PANTHEON_UPLOAD_PATH) {
