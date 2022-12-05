@@ -68,7 +68,7 @@ console.log(PANTHEON_ENVIRONMENT_PREFIX)
 let tempURL = process.env.WPGRAPHQL_URL
 tempURL = tempURL.replace(/^https?:\/\//,'',)
 console.log(tempURL)
-backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${tempURL}`
+backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
 
 
 const injectedOptions = {};
