@@ -18,7 +18,8 @@ if (
 	}
 	throw new Error(message);
 }
-
+console.log('CMS ENDPOINT')
+console.log(process.env.PANTHEON_CMS_ENDPOINT)
 let backendUrl, imageDomain;
 if (process.env.WPGRAPHQL_URL === undefined) {
 	backendUrl = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
@@ -48,18 +49,12 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	let IS_LIVE_ENVIRONMENT = undefined
 	const envPrefix =
 		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
-	console.log('PREFIX')
-	console.log(envPrefix)
 	if (envPrefix === 'live') {
-		console.log('IS LIVE')
 		PANTHEON_ENVIRONMENT_PREFIX = 'live'
 		IS_LIVE_ENVIRONMENT = 'live'
 	} else {
-		console.log('ELSE CASE')
-		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/);
+		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
 	}
-	console.log('PANTHEON ENVIRONMENT')
-	console.log(PANTHEON_ENVIRONMENT_PREFIX)
 }
 
 /** @type {import('next').NextConfig} */
