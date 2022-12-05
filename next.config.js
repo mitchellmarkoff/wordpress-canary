@@ -33,7 +33,7 @@ if (
 }
 
 let backendUrl, imageDomain;
-backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-dev-decoupled-wordpress-qa.pantheonsite.io/wp/graphql`
+backendUrl = `http://multi-wp-wp-for-interview.pantheonsite.io`
 if (process.env.WPGRAPHQL_URL === undefined) {
 	// backendUrl = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
 	imageDomain = process.env.IMAGE_DOMAIN || process.env.PANTHEON_CMS_ENDPOINT;
