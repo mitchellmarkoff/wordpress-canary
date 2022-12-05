@@ -64,7 +64,7 @@ if (process.env.WPGRAPHQL_URL === undefined) {
 			'',
 		);
 }
-backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
+// backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
 console.log('BACKEND URL')
 console.log(backendUrl)
 // remove trailing slash if it exists
