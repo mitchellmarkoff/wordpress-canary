@@ -51,7 +51,7 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	console.log('Env prefix')
 	console.log(envPrefix)
 	console.log('Checking')
-	const PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	let PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
 	if (envPrefix !== 'live') {
 		console.log('IS NOT LIVE')
 		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
