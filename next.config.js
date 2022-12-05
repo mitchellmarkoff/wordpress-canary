@@ -41,17 +41,17 @@ console.log(backendUrl)
 // remove trailing slash if it exists
 imageDomain = imageDomain.replace(/\/$/, '');
 
+let PANTHEON_ENVIRONMENT_PREFIX, IS_LIVE_ENVIRONMENT
 console.log('CHECKING ENV 2')
 if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	console.log(process.env.PANTHEON_ENVIRONMENT_URL)
 	// let PANTHEON_ENVIRONMENT_PREFIX = undefined
-	let IS_LIVE_ENVIRONMENT = undefined
 	const envPrefix =
 		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
 	console.log('Env prefix')
 	console.log(envPrefix)
 	console.log('Checking')
-	let PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
 	if (envPrefix !== 'live') {
 		console.log('IS NOT LIVE')
 		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
