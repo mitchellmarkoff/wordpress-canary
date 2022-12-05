@@ -28,11 +28,13 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
 	console.log('Env prefix')
 	console.log(envPrefix)
-	if (envPrefix === 'live') {
+	console.log('Checking')
+	if (envPrefix !== 'live') {
+		console.log('IS NOT LIVE')
+		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	} else {
 		PANTHEON_ENVIRONMENT_PREFIX = 'live'
 		IS_LIVE_ENVIRONMENT = 'live'
-	} else {
-		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
 	}
 }
 console.log('Done')
