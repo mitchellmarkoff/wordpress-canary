@@ -52,6 +52,7 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	console.log(envPrefix)
 	console.log('Checking')
 	const PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	const match = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
 	// if (envPrefix !== 'live') {
 	// 	console.log('IS NOT LIVE')
 	// 	PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
@@ -64,6 +65,7 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	// }
 }
 console.log('Done')
+console.log(match)
 console.log(PANTHEON_ENVIRONMENT_PREFIX)
 backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
 
