@@ -56,10 +56,13 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 		IS_LIVE_ENVIRONMENT = 'live'
 	} else {
 		console.log('ELSE CASE')
-		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/);
+		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
 	}
 	console.log('PANTHEON ENVIRONMENT')
 	console.log(PANTHEON_ENVIRONMENT_PREFIX)
+	console.log('IS LIVE')
+	console.log(IS_LIVE_ENVIRONMENT)
+
 }
 
 
