@@ -44,8 +44,7 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 
 console.log('Done')
 console.log(PANTHEON_ENVIRONMENT_PREFIX)
-console.log(match)
-console.log('finished')
+
 
 
 let backendUrl, imageDomain;
