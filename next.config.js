@@ -6,19 +6,6 @@ require('dotenv').config({
 	path: path.resolve(process.cwd(), '.env.development.local'),
 });
 
-if (process.env.PANTHEON_ENVIRONMENT_URL) {
-	let PANTHEON_ENVIRONMENT_PREFIX = undefined
-	let IS_LIVE_ENVIRONMENT = undefined
-	const envPrefix =
-		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
-	if (envPrefix === 'live') {
-		PANTHEON_ENVIRONMENT_PREFIX = 'live'
-		IS_LIVE_ENVIRONMENT = 'live'
-	} else {
-		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
-	}
-}
-
 if (
 	process.env.WPGRAPHQL_URL === undefined &&
 	process.env.PANTHEON_CMS_ENDPOINT === undefined
@@ -30,6 +17,19 @@ if (
 		message = `No CMS Endpoint found.\nLink a CMS or set the WPGRAPHQL_URL environment variable in the settings tab in the dashboard\nIf your site does not require a backend to build, remove this check from the next.config.js.`;
 	}
 	throw new Error(message);
+}
+
+if (process.env.PANTHEON_ENVIRONMENT_URL) {
+	let PANTHEON_ENVIRONMENT_PREFIX = undefined
+	let IS_LIVE_ENVIRONMENT = undefined
+	const envPrefix =
+		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
+	if (envPrefix === 'live') {
+		PANTHEON_ENVIRONMENT_PREFIX = 'live'
+		IS_LIVE_ENVIRONMENT = 'live'
+	} else {
+		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	}
 }
 
 let backendUrl, imageDomain;
@@ -48,6 +48,9 @@ if (process.env.WPGRAPHQL_URL === undefined) {
 			'',
 		);
 }
+backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
+console.log('BACKEND URL')
+console.log(backendUrl)
 // remove trailing slash if it exists
 imageDomain = imageDomain.replace(/\/$/, '');
 
@@ -61,7 +64,7 @@ const nextConfig = {
 	...(injectedOptions && injectedOptions),
 	reactStrictMode: true,
 	env: {
-		backendUrl: `https://multi-wp-wp-for-interview.pantheonsite.io/wp/graphql`,
+		backendUrl: backendUrl,
 		imageUrl: `https://${imageDomain}`,
 	},
 	images: {
