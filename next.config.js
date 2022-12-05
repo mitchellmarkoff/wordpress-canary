@@ -19,6 +19,19 @@ if (
 	throw new Error(message);
 }
 
+if (process.env.PANTHEON_ENVIRONMENT_URL) {
+	let PANTHEON_ENVIRONMENT_PREFIX = undefined
+	let IS_LIVE_ENVIRONMENT = undefined
+	const envPrefix =
+		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
+	if (envPrefix === 'live') {
+		PANTHEON_ENVIRONMENT_PREFIX = 'live'
+		IS_LIVE_ENVIRONMENT = 'live'
+	} else {
+		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	}
+}
+
 let backendUrl, imageDomain;
 if (process.env.WPGRAPHQL_URL === undefined) {
 	backendUrl = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
@@ -35,6 +48,9 @@ if (process.env.WPGRAPHQL_URL === undefined) {
 			'',
 		);
 }
+backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
+console.log('BACKEND URL')
+console.log(backendUrl)
 // remove trailing slash if it exists
 imageDomain = imageDomain.replace(/\/$/, '');
 
@@ -42,29 +58,6 @@ const injectedOptions = {};
 if (process.env.PANTHEON_UPLOAD_PATH) {
 	injectedOptions['basePath'] = process.env.PANTHEON_UPLOAD_PATH;
 }
-
-if (process.env.PANTHEON_ENVIRONMENT_URL) {
-	let PANTHEON_ENVIRONMENT_PREFIX = undefined
-	let IS_LIVE_ENVIRONMENT = undefined
-	const envPrefix =
-		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
-	console.log('PREFIX')
-	console.log(envPrefix)
-	if (envPrefix === 'live') {
-		console.log('IS LIVE')
-		PANTHEON_ENVIRONMENT_PREFIX = 'live'
-		IS_LIVE_ENVIRONMENT = 'live'
-	} else {
-		console.log('ELSE CASE')
-		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
-	}
-	console.log('PANTHEON ENVIRONMENT')
-	console.log(PANTHEON_ENVIRONMENT_PREFIX)
-	console.log('IS LIVE')
-	console.log(IS_LIVE_ENVIRONMENT)
-
-}
-
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
