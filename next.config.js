@@ -64,7 +64,6 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	}
 }
 console.log('Done')
-console.log(match)
 console.log(PANTHEON_ENVIRONMENT_PREFIX)
 backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
 
