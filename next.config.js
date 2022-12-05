@@ -62,6 +62,7 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	console.log(PANTHEON_ENVIRONMENT_PREFIX)
 }
 
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	...(injectedOptions && injectedOptions),
