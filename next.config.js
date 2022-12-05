@@ -19,7 +19,30 @@ if (
 	}
 	throw new Error(message);
 }
-	console.log('CHECKING ENV')
+
+let backendUrl, imageDomain;
+if (process.env.WPGRAPHQL_URL === undefined) {
+	backendUrl = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
+	imageDomain = process.env.IMAGE_DOMAIN || process.env.PANTHEON_CMS_ENDPOINT;
+
+	// populate WPGRAPHQL_URL as a fallback and for build scripts
+	process.env.WPGRAPHQL_URL = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
+} else {
+	backendUrl = process.env.WPGRAPHQL_URL;
+	imageDomain =
+		process.env.IMAGE_DOMAIN ||
+		process.env.WPGRAPHQL_URL.replace(/\/wp\/graphql$/, '').replace(
+			/^https?:\/\//,
+			'',
+		);
+}
+backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
+console.log('BACKEND URL')
+console.log(backendUrl)
+// remove trailing slash if it exists
+imageDomain = imageDomain.replace(/\/$/, '');
+
+console.log('CHECKING ENV 2')
 if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	console.log(process.env.PANTHEON_ENVIRONMENT_URL)
 	// let PANTHEON_ENVIRONMENT_PREFIX = undefined
@@ -43,28 +66,6 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 }
 console.log('Done')
 console.log(PANTHEON_ENVIRONMENT_PREFIX)
-
-let backendUrl, imageDomain;
-if (process.env.WPGRAPHQL_URL === undefined) {
-	backendUrl = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
-	imageDomain = process.env.IMAGE_DOMAIN || process.env.PANTHEON_CMS_ENDPOINT;
-
-	// populate WPGRAPHQL_URL as a fallback and for build scripts
-	process.env.WPGRAPHQL_URL = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
-} else {
-	backendUrl = process.env.WPGRAPHQL_URL;
-	imageDomain =
-		process.env.IMAGE_DOMAIN ||
-		process.env.WPGRAPHQL_URL.replace(/\/wp\/graphql$/, '').replace(
-			/^https?:\/\//,
-			'',
-		);
-}
-backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
-console.log('BACKEND URL')
-console.log(backendUrl)
-// remove trailing slash if it exists
-imageDomain = imageDomain.replace(/\/$/, '');
 
 const injectedOptions = {};
 if (process.env.PANTHEON_UPLOAD_PATH) {
