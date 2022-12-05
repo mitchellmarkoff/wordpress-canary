@@ -6,6 +6,19 @@ require('dotenv').config({
 	path: path.resolve(process.cwd(), '.env.development.local'),
 });
 
+if (process.env.PANTHEON_ENVIRONMENT_URL) {
+	let PANTHEON_ENVIRONMENT_PREFIX = undefined
+	let IS_LIVE_ENVIRONMENT = undefined
+	const envPrefix =
+		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
+	if (envPrefix === 'live') {
+		PANTHEON_ENVIRONMENT_PREFIX = 'live'
+		IS_LIVE_ENVIRONMENT = 'live'
+	} else {
+		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	}
+}
+
 if (
 	process.env.WPGRAPHQL_URL === undefined &&
 	process.env.PANTHEON_CMS_ENDPOINT === undefined
@@ -18,17 +31,17 @@ if (
 	}
 	throw new Error(message);
 }
-console.log('CMS ENDPOINT')
-console.log(process.env.PANTHEON_CMS_ENDPOINT)
+
 let backendUrl, imageDomain;
+backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-dev-decoupled-wordpress-qa.pantheonsite.io/wp/graphql`
 if (process.env.WPGRAPHQL_URL === undefined) {
-	backendUrl = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
+	// backendUrl = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
 	imageDomain = process.env.IMAGE_DOMAIN || process.env.PANTHEON_CMS_ENDPOINT;
 
 	// populate WPGRAPHQL_URL as a fallback and for build scripts
 	process.env.WPGRAPHQL_URL = `https://${process.env.PANTHEON_CMS_ENDPOINT}/wp/graphql`;
 } else {
-	backendUrl = process.env.WPGRAPHQL_URL;
+	// backendUrl = process.env.WPGRAPHQL_URL;
 	imageDomain =
 		process.env.IMAGE_DOMAIN ||
 		process.env.WPGRAPHQL_URL.replace(/\/wp\/graphql$/, '').replace(
@@ -42,19 +55,6 @@ imageDomain = imageDomain.replace(/\/$/, '');
 const injectedOptions = {};
 if (process.env.PANTHEON_UPLOAD_PATH) {
 	injectedOptions['basePath'] = process.env.PANTHEON_UPLOAD_PATH;
-}
-
-if (process.env.PANTHEON_ENVIRONMENT_URL) {
-	let PANTHEON_ENVIRONMENT_PREFIX = undefined
-	let IS_LIVE_ENVIRONMENT = undefined
-	const envPrefix =
-		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
-	if (envPrefix === 'live') {
-		PANTHEON_ENVIRONMENT_PREFIX = 'live'
-		IS_LIVE_ENVIRONMENT = 'live'
-	} else {
-		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
-	}
 }
 
 /** @type {import('next').NextConfig} */
