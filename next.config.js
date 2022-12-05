@@ -22,23 +22,24 @@ if (
 	console.log('CHECKING ENV')
 if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	console.log(process.env.PANTHEON_ENVIRONMENT_URL)
-	let PANTHEON_ENVIRONMENT_PREFIX = undefined
+	// let PANTHEON_ENVIRONMENT_PREFIX = undefined
 	let IS_LIVE_ENVIRONMENT = undefined
 	const envPrefix =
 		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
 	console.log('Env prefix')
 	console.log(envPrefix)
 	console.log('Checking')
-	if (envPrefix !== 'live') {
-		console.log('IS NOT LIVE')
-		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
-		console.log('Test match')
-		const match = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
-		console.log(match)
-	} else {
-		PANTHEON_ENVIRONMENT_PREFIX = 'live'
-		IS_LIVE_ENVIRONMENT = 'live'
-	}
+	const PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	// if (envPrefix !== 'live') {
+	// 	console.log('IS NOT LIVE')
+	// 	PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	// 	console.log('Test match')
+	// 	const match = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
+	// 	console.log(match)
+	// } else {
+	// 	PANTHEON_ENVIRONMENT_PREFIX = 'live'
+	// 	IS_LIVE_ENVIRONMENT = 'live'
+	// }
 }
 console.log('Done')
 console.log(PANTHEON_ENVIRONMENT_PREFIX)
