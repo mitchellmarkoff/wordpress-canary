@@ -53,11 +53,12 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	}
 }
 
-backendUrl = `https://${PANTHEON_ENVIRONMENT}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
+backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
 
 console.log('CONFIG');
 console.log(process.env.PANTHEON_ENVIRONMENT);
 console.log(process.env.PANTHEON_ENVIRONMENT_URL);
+console.log(PANTHEON_ENVIRONMENT_PREFIX)
 
 
 const injectedOptions = {};
