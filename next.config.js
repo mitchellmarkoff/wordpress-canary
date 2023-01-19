@@ -36,39 +36,28 @@ if (process.env.WPGRAPHQL_URL === undefined) {
 			'',
 		);
 }
-console.log('BACKEND URL')
-console.log(backendUrl)
+
 // remove trailing slash if it exists
 imageDomain = imageDomain.replace(/\/$/, '');
 
 let PANTHEON_ENVIRONMENT_PREFIX, IS_LIVE_ENVIRONMENT
-console.log('CHECKING ENV 2')
 if (process.env.PANTHEON_ENVIRONMENT_URL) {
-	console.log(process.env.PANTHEON_ENVIRONMENT_URL)
-	// let PANTHEON_ENVIRONMENT_PREFIX = undefined
 	const envPrefix =
 		process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*)/)[0];
-	console.log('Env prefix')
-	console.log(envPrefix)
-	console.log('Checking')
 	PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
 	if (envPrefix !== 'live') {
-		console.log('IS NOT LIVE')
 		PANTHEON_ENVIRONMENT_PREFIX = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
-		console.log('Test match')
-		const match = process.env.PANTHEON_ENVIRONMENT_URL.match(/^([^-]*-)[^-]*/)[0];
-		console.log(match)
 	} else {
 		PANTHEON_ENVIRONMENT_PREFIX = 'live'
 		IS_LIVE_ENVIRONMENT = 'live'
 	}
 }
-console.log('Done')
-console.log(PANTHEON_ENVIRONMENT_PREFIX)
-let tempURL = process.env.WPGRAPHQL_URL
-tempURL = tempURL.replace(/^https?:\/\//,'',)
-console.log(tempURL)
+
 backendUrl = `https://${PANTHEON_ENVIRONMENT_PREFIX}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
+
+console.log('CONFIG');
+console.log(process.env.PANTHEON_ENVIRONMENT);
+console.log(process.env.PANTHEON_ENVIRONMENT_URL);
 
 
 const injectedOptions = {};
