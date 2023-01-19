@@ -58,7 +58,7 @@ backendUrl = `https://${process.env.PANTHEON_ENVIRONMENT}-${process.env.WPGRAPHQ
 console.log('CONFIG');
 console.log(process.env.PANTHEON_ENVIRONMENT);
 console.log(process.env.PANTHEON_ENVIRONMENT_URL);
-console.log(PANTHEON_ENVIRONMENT_PREFIX)
+console.log(process.env.PANTHEON_CMS_ENDPOINT)
 
 
 const injectedOptions = {};
