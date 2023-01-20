@@ -58,6 +58,7 @@ console.log(process.env.PANTHEON_CMS_ENDPOINT)
 
 
 console.log(PANTHEON_ENVIRONMENT)
+console.log(porcess.env.WPGRAPHQL_URL)
 if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
 	backendUrl = new URL(`-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`, `https://${
 		process.env.PANTHEON_ENVIRONMENT
