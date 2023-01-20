@@ -57,11 +57,11 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 console.log(process.env.PANTHEON_CMS_ENDPOINT)
 
 
-console.log(backendUrl)
+console.log(PANTHEON_ENVIRONMENT)
 if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
 	backendUrl = new URL(`-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`, `https://${
 		process.env.PANTHEON_ENVIRONMENT
-	}`).href
+	}`)
 	console.log(backendUrl)
 }
 console.log('CONFIG');
