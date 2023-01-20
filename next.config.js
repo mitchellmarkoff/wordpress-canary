@@ -59,13 +59,9 @@ console.log(process.env.PANTHEON_CMS_ENDPOINT)
 
 console.log(backendUrl)
 if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
-	console.log('HERE')
-	console.log(`https://${
+	backendUrl = new URL(`-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`, `https://${
 		process.env.PANTHEON_ENVIRONMENT
-	}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`)
-	backendUrl = `https://${
-		process.env.PANTHEON_ENVIRONMENT
-	}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`;
+	}`)
 }
 console.log('CONFIG');
 // console.log(WPGRAPHQL_URL)
