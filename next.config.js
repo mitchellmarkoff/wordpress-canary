@@ -37,6 +37,7 @@ if (process.env.WPGRAPHQL_URL === undefined) {
 		);
 }
 
+
 // remove trailing slash if it exists
 imageDomain = imageDomain.replace(/\/$/, '');
 
