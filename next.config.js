@@ -54,7 +54,6 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	}
 }
 
-console.log(process.env.PANTHEON_ENVIRONMENT);
 console.log(process.env.PANTHEON_CMS_ENDPOINT)
 
 
