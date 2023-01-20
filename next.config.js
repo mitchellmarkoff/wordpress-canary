@@ -61,13 +61,13 @@ console.log(backendUrl)
 if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
 	backendUrl = `https://${
 		process.env.PANTHEON_ENVIRONMENT
-	}-${backendUrl.replace(/^https?:\/\/[^-]*-/, '')}`;
+	}-${WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`;
 }
 console.log('CONFIG');
 // console.log(WPGRAPHQL_URL)
 console.log(process.env.PANTHEON_ENVIRONMENT);
 console.log(process.env.PANTHEON_ENVIRONMENT_URL);
-console.log(process.env.PANTHEON_CMS_ENDPOINT)
+console.log(process.env.PANTHEON_CMS_ENDPOINT);
 
 
 const injectedOptions = {};
