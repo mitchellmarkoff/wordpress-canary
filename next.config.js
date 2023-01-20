@@ -53,8 +53,11 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 	}
 }
 
-backendUrl = `https://${process.env.PANTHEON_ENVIRONMENT}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//,'',)}`
-
+if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
+	backendUrl = `https://${
+		process.env.PANTHEON_ENVIRONMENT
+	}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\//, '')}`;
+}
 console.log('CONFIG');
 console.log(process.env.PANTHEON_ENVIRONMENT);
 console.log(process.env.PANTHEON_ENVIRONMENT_URL);
