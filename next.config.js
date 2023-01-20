@@ -64,7 +64,7 @@ if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
 	}-${WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`)
 	backendUrl = `https://${
 		process.env.PANTHEON_ENVIRONMENT
-	}-${WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`;
+	}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`;
 }
 console.log('CONFIG');
 
