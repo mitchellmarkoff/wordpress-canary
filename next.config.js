@@ -61,7 +61,7 @@ console.log(backendUrl)
 if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
 	backendUrl = new URL(`-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`, `https://${
 		process.env.PANTHEON_ENVIRONMENT
-	}`)
+	}`).href
 	console.log(backendUrl)
 }
 console.log('CONFIG');
