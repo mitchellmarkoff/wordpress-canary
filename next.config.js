@@ -56,7 +56,6 @@ if (process.env.PANTHEON_ENVIRONMENT_URL) {
 
 console.log(process.env.PANTHEON_CMS_ENDPOINT)
 
-
 console.log(backendUrl)
 if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
 	backendUrl = `https://${
