@@ -60,9 +60,13 @@ console.log(process.env.PANTHEON_CMS_ENDPOINT)
 console.log(process.env.PANTHEON_ENVIRONMENT)
 console.log(process.env.WPGRAPHQL_URL)
 if (process.env.PANTHEON_ENVIRONMENT !== 'live') {
-	backendUrl = `https://${
+	backendUrl = new URL(`-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`, `https://${
 		process.env.PANTHEON_ENVIRONMENT
-	}-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`;
+	}`).href
+	console.log(backendUrl)
+	// backendUrl = `https://${
+	// 	process.env.PANTHEON_ENVIRONMENT
+	// }-${process.env.WPGRAPHQL_URL.replace(/^https?:\/\/[^-]*-/, '')}`;
 }
 console.log('CONFIG');
 // console.log(WPGRAPHQL_URL)
